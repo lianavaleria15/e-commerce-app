@@ -18,6 +18,8 @@ const init = async () => {
   try {
     await connection.sync({ force: false });
 
+    console.log(`[INFO]: DB connection successful`);
+
     app.listen(PORT, () =>
       console.log(`Server running on http://localhost:${PORT}`)
     );
