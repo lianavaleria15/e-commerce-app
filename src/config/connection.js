@@ -11,9 +11,12 @@ const dbHost = process.env.DB_HOST;
 const dbOptions = {
   host: dbHost,
   dialect: "mysql",
+  password: dbPassword,
+  database: dbName,
+  user: dbUser,
   port: 3306,
 };
 
-const connection = new Sequelize(dbName, dbUser, dbPassword, dbOptions);
+const connection = new Sequelize(dbOptions);
 
 module.exports = connection;
