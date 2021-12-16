@@ -4,7 +4,8 @@
   "description": "An app which builds the back end for an e-commerce site. It uses Express.js API and Sequelize to interact with a MySQL database.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
