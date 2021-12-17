@@ -1,5 +1,7 @@
 const { Router } = require("express");
 
+const router = Router();
+
 const {
   getAllCategories,
   getCategory,
@@ -9,9 +11,6 @@ const {
 } = require("../../controllers/api/category-routes");
 
 // The `/api/categories` endpoint
-
-const router = Router();
-
 router.get("/", getAllCategories);
 
 router.get("/:id", getCategory);
