@@ -1,10 +1,13 @@
 //import category and product models
 const { Category, Product } = require("../../models");
 
-const getAllCategories = (req, res) => {
-  Category.findAll().then((data) => {
-    res.json(data);
-  });
+const getAllCategories = async (req, res) => {
+  try {
+    const allCategoriesData = await Category.findAll();
+    res.status(200).json(allCategoriesData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 const getCategory = (req, res) => {

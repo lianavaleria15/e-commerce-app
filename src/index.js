@@ -6,9 +6,9 @@ const connection = require("./config/connection");
 
 const routes = require("./routes");
 
-const PORT = process.env.PORT || 4000;
-
 const app = express();
+
+const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
