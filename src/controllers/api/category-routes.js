@@ -2,7 +2,9 @@
 const { Category, Product } = require("../../models");
 
 const getAllCategories = (req, res) => {
-  console.log("Get all categories");
+  Category.findAll().then((data) => {
+    res.json(data);
+  });
 };
 
 const getCategory = (req, res) => {
