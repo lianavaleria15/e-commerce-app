@@ -5,8 +5,9 @@ const getAllCategories = async (req, res) => {
   try {
     const allCategoriesData = await Category.findAll();
     return res.status(200).json(allCategoriesData);
-  } catch (err) {
-    return res.status(500).json(err);
+  } catch (error) {
+    console.log(`[ERROR]: Failed to get categories | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -15,21 +16,32 @@ const getCategory = async (req, res) => {
     const categoryData = await Category.findByPk(req.params.id);
 
     if (!categoryData) {
-      res.status(404).json({ message: "No location was found for this id!" });
+      res.status(404).json({
+        success: false,
+        message: "Category does not exist",
+      });
       return;
     }
     res.status(200).json(categoryData);
-  } catch (err) {
-    res.status(err).json(err);
+  } catch (error) {
+    console.log(`[ERROR]: Failed to get category by id | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
 const createCategory = async (req, res) => {
+  //get new category from request body
   try {
-    const { newCategoryData } = await Category.create(req.body);
-    res.status(200).json(newCategoryData);
-  } catch (err) {
-    res.status(500).json(err);
+    const category = req.body;
+
+    //insert category in the DB
+    const newCategory = await Category.create(category);
+
+    //send response
+    return res.json(newCategory);
+  } catch (error) {
+    console.log(`[ERROR]: Failed to create category | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -41,8 +53,9 @@ const updateCategory = async (req, res) => {
       },
     });
     res.status(200).json(updatedCategory);
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    console.log(`[ERROR]: Failed to create category | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -54,8 +67,9 @@ const deleteCategory = async (req, res) => {
       },
     });
     res.status(200).json(updatedCategory);
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    console.log(`[ERROR]: Failed to create category | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 

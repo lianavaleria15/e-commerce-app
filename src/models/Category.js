@@ -15,7 +15,7 @@ const schema = {
   },
   category_name: {
     type: DataTypes.STRING,
-    allowNull: "false",
+    allowNull: false,
   },
 };
 
