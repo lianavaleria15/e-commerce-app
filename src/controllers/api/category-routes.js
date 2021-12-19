@@ -54,21 +54,22 @@ const updateCategory = async (req, res) => {
     });
     res.status(200).json(updatedCategory);
   } catch (error) {
-    console.log(`[ERROR]: Failed to create category | ${error.message}`);
+    console.log(`[ERROR]: Failed to update category | ${error.message}`);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
 const deleteCategory = async (req, res) => {
+  //delete category by id from DB
   try {
-    const { updatedCategory } = await Category.destroy(req.body, {
+    await Category.destroy({
       where: {
         id: req.params.id,
       },
     });
-    res.status(200).json(updatedCategory);
+    return res.json({ success: true });
   } catch (error) {
-    console.log(`[ERROR]: Failed to create category | ${error.message}`);
+    console.log(`[ERROR]: Failed to delete category | ${error.message}`);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
