@@ -33,13 +33,20 @@ const createCategory = async (req, res) => {
   }
 };
 
-const updateCategory = (req, res) => {
-  console.log("Update category");
+const updateCategory = async (req, res) => {
+  try {
+    const updatedCategory = await Category.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json(updatedCategory);
+  } catch (error) {
+    res.status(500).json({ success: false, error: "Failed to send response" });
+  }
 };
 
-const deleteCategory = (req, res) => {
-  console.log("Delete category");
-};
+const deleteCategory = async (req, res) => {};
 
 module.exports = {
   getAllCategories,
