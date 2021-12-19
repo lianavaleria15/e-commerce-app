@@ -35,18 +35,29 @@ const createCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
   try {
-    const updatedCategory = await Category.update(req.body, {
+    const { updatedCategory } = await Category.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
     res.status(200).json(updatedCategory);
-  } catch (error) {
-    res.status(500).json({ success: false, error: "Failed to send response" });
+  } catch (err) {
+    res.status(500).json(err);
   }
 };
 
-const deleteCategory = async (req, res) => {};
+const deleteCategory = async (req, res) => {
+  try {
+    const { updatedCategory } = await Category.destroy(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json(updatedCategory);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 module.exports = {
   getAllCategories,
