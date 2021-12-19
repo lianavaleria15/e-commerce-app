@@ -1,6 +1,21 @@
 //import category and product models
 const { Category } = require("../../models/");
 
+const cleanupPayload = (payload) => {
+  const editableFields = ["category_name"];
+
+  //go through payload and check if each field exists in editable fields array
+  return Object.entries(payload).reduce((acc, { key, value }) => {
+    if (editableFields.includes(key)) {
+      return {
+        ...acc,
+        [key]: value,
+      };
+    }
+    return acc;
+  }, {});
+};
+
 const getAllCategories = async (req, res) => {
   try {
     const allCategoriesData = await Category.findAll();
@@ -47,12 +62,23 @@ const createCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
   try {
-    const { updatedCategory } = await Category.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).json(updatedCategory);
+    //get the fields to update from the req body
+    const payload = cleanupPayload(req.body);
+    console.log(req.body);
+    console.log(payload);
+    //validate payload
+    if (Object.keys(payload).length) {
+      //update teh category in the DB
+      await Category.update(payload, { where: { id: req.params.id } });
+
+      //send response
+      return res.json({ success: true });
+    }
+
+    //send bad request response
+    return res
+      .status(400)
+      .json({ success: false, error: "Please provide a valid category name" });
   } catch (error) {
     console.log(`[ERROR]: Failed to update category | ${error.message}`);
     return res.status(500).json({ success: false, error: error.message });
