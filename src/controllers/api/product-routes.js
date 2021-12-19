@@ -1,11 +1,12 @@
-const { Product, Category, Tag, ProductTag } = require("../../models");
+const { Product, ProductTag } = require("../../models");
 
 const getAllProducts = async (req, res) => {
   try {
     const allProductsData = await Product.findAll();
     return res.status(200).json(allProductsData);
-  } catch (err) {
-    return res.status(500).json(err);
+  } catch (error) {
+    console.log(`[ERROR]: Failed to get products | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -14,12 +15,16 @@ const getProduct = async (req, res) => {
     const productData = await Product.findByPk(req.params.id);
 
     if (!productData) {
-      res.status(404).json({ message: "No location was found for this id!" });
+      res.status(404).json({
+        success: false,
+        message: "Product does not exist",
+      });
       return;
     }
     res.status(200).json(productData);
-  } catch (err) {
-    res.status(err).json(err);
+  } catch (error) {
+    console.log(`[ERROR]: Failed to get product by id | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 const createProduct = (req, res) => {
