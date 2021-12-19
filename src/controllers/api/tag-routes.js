@@ -44,7 +44,7 @@ const updateTag = async (req, res) => {
 };
 const deleteTag = async (req, res) => {
   try {
-    const { updatedCategory } = await Tag.destroy(req.body, {
+    const updatedCategory = await Tag.destroy(req.body, {
       where: {
         id: req.params.id,
       },

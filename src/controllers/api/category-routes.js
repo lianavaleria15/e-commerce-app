@@ -1,5 +1,5 @@
 //import category and product models
-const { Category, Product, Tag } = require("../../models");
+const { Category } = require("../../models/");
 
 const getAllCategories = async (req, res) => {
   try {
