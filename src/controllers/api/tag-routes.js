@@ -55,15 +55,17 @@ const updateTag = async (req, res) => {
 };
 
 const deleteTag = async (req, res) => {
+  //delete tag by id from DB
   try {
-    const updatedCategory = await Tag.destroy(req.body, {
+    await Tag.destroy({
       where: {
         id: req.params.id,
       },
     });
-    res.status(200).json(updatedCategory);
-  } catch (err) {
-    res.status(500).json(err);
+    return res.json({ success: true });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to delete tag | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
