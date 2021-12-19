@@ -99,7 +99,20 @@ const updateProduct = (req, res) => {
     });
 };
 
-const deleteProduct = (req, res) => {};
+const deleteProduct = async (req, res) => {
+  //delete product by id from DB
+  try {
+    await Product.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    return res.json({ success: true });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to delete product | ${error.message}`);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
 
 module.exports = {
   getAllProducts,
