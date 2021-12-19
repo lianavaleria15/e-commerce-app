@@ -1,13 +1,27 @@
 const { Product, Category, Tag, ProductTag } = require("../../models");
 
-const getAllProducts = (req, res) => {
-  console.log("Get all products");
+const getAllProducts = async (req, res) => {
+  try {
+    const allProductsData = await Product.findAll();
+    return res.status(200).json(allProductsData);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 };
 
-const getProduct = (req, res) => {
-  console.log("Get products");
-};
+const getProduct = async (req, res) => {
+  try {
+    const productData = await Product.findByPk(req.params.id);
 
+    if (!productData) {
+      res.status(404).json({ message: "No location was found for this id!" });
+      return;
+    }
+    res.status(200).json(productData);
+  } catch (err) {
+    res.status(err).json(err);
+  }
+};
 const createProduct = (req, res) => {
   /* req.body should look like this...
   {

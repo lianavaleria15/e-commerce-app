@@ -24,8 +24,13 @@ const getCategory = async (req, res) => {
   }
 };
 
-const createCategory = (req, res) => {
-  console.log("Create category");
+const createCategory = async (req, res) => {
+  try {
+    const { newCategoryData } = await Category.create(req.body);
+    res.status(200).json(newCategoryData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 const updateCategory = (req, res) => {
