@@ -63,11 +63,10 @@ const createCategory = async (req, res) => {
 const updateCategory = async (req, res) => {
   try {
     //get the fields to update from the req body
-    const payload = cleanupPayload(req.body);
-    console.log(req.body);
-    console.log(payload);
+    const payload = req.body;
+
     //validate payload
-    if (Object.keys(payload).length) {
+    if (payload) {
       //update teh category in the DB
       await Category.update(payload, { where: { id: req.params.id } });
 
