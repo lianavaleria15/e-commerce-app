@@ -59,12 +59,11 @@ const createTag = async (req, res) => {
 const updateTag = async (req, res) => {
   try {
     //get the fields to update from the req body
-    const payload = cleanupPayload(req.body);
-    console.log(req.body);
-    console.log(payload);
+    const payload = req.body;
+
     //validate payload
-    if (Object.keys(payload).length) {
-      //update teh category in the DB
+    if (payload) {
+      //update the category in the DB
       await Tag.update(payload, { where: { id: req.params.id } });
 
       //send response

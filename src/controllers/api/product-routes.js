@@ -27,6 +27,7 @@ const getProduct = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
+
 const createProduct = (req, res) => {
   /* req.body should look like this...
   {
