@@ -8,7 +8,7 @@ In this application I built the backend for an E-commerce app using Node.js and 
 
 ## Demo Video
 
-Click [here]() to view the demo video.
+Click [here](https://drive.google.com/file/d/17xMHZYOceY-o3fpgROP9cC9sCNyBzPgB/view) to view the demo video.
 
 ## User Story
 
@@ -79,5 +79,3 @@ If you have any questions related to the application or repository, would like t
 
 - 👩 [Liana Laurentiu](https://github.com/lianavaleria15)
 - 📧 [liana.valeria15@gmail.com](mailto:liana.valeria15@gmail.com)
-
-## Screenshots
