@@ -7,7 +7,6 @@ const sequelize = require("../config/connection");
 
 const seedAll = async () => {
   try {
-    console.log("works");
     await sequelize.sync({ force: true });
     console.log("\n----- DATABASE SYNCED -----\n");
 
