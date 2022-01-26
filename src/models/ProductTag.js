@@ -18,6 +18,7 @@ const schema = {
       model: "product",
       key: "id",
     },
+    onDelete: "cascade",
   },
 
   tag_id: {
@@ -26,6 +27,7 @@ const schema = {
       model: "tag",
       key: "id",
     },
+    onDelete: "cascade",
   },
 };
 
@@ -34,7 +36,7 @@ const options = {
   timestamps: false,
   freezeTableName: true,
   underscored: true,
-  modelName: "product_tag",
+  modelName: "ProductTag",
 };
 
 ProductTag.init(schema, options);

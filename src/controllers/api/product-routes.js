@@ -60,8 +60,21 @@ const createProduct = (req, res) => {
 };
 
 const updateProduct = (req, res) => {
+  const newProduct = {
+    product_name: req.body.productName,
+    price: req.body.price,
+    stock: req.body.stock,
+    tagIds: req.body.tagIds,
+    category_id: req.body.categoryId,
+  };
+
+  const productExists = Product.findByPk(req.params.id);
+
+  if (!productExists) {
+    return res.status(400).json({ error: "Product doesn't exists" });
+  }
   // update product data
-  Product.update(req.body, {
+  Product.update(newProduct, {
     where: {
       id: req.params.id,
     },
